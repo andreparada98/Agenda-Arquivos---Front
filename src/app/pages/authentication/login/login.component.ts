@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.formLogin = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
 
     })
@@ -37,19 +37,21 @@ export class LoginComponent implements OnInit {
 
   public get f() { return this.formLogin.controls; }
 
+  teste(){
+    console.log('aoooba')
+  }
 
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
+    
     if (this.formLogin.invalid) {
       return;
     }
-
-    this.authentication = new JwtAuthentication(this.f.username.value, this.f.password.value);
-    this.authenticationService.login(this.authentication)
-      .pipe(first())
-      .subscribe(
-        data => {
+    
+    this.authentication = new JwtAuthentication(this.f.email.value, this.f.password.value);
+    this.authenticationService.login(this.authentication).pipe(first()).subscribe(
+      data => {
             this.router.navigate(['/']);
         },
         error => {

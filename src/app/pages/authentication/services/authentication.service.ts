@@ -40,8 +40,15 @@ export class AuthenticationService {
 
 
         login(authentication: JwtAuthentication) {
-            return this.http.post<Response<Token>>(`${environment.api}auth`, authentication, httpOptions)
-                .pipe(map((response: any) => {
+            console.log(`${environment.api}auth`)
+            
+            return this.http.post<Response<Token>>(`${environment.api}login`, authentication, httpOptions)
+            .pipe(map((response: any) => {
+                    console.log(response.message)
+                    if(response.message == 'User Logged In'){
+                        return this.router.navigate(['/']);
+                    }
+
                     // login successful if there's a jwt token in the response
                     if (response && response.data.token) {
                         // store user details and jwt token in local storage to keep user logged in between page refreshes
