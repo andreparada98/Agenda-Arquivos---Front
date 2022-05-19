@@ -48,7 +48,7 @@ export class AuthenticationService {
                         response.userDetails.token = response.data.token;
                         localStorage.setItem('currentUser', JSON.stringify(response.userDetails));
                         this.currentUserSubject.next(response.userDetails);
-                        this.carregarPermissions(response.userDetails.authorities);
+                        this.carregarPermissions(response.userDetails.authorities); //Future adds.
                     }
     
                     return response.userDetails;
