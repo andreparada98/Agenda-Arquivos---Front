@@ -37,10 +37,6 @@ export class LoginComponent implements OnInit {
 
   public get f() { return this.formLogin.controls; }
 
-  teste(){
-    console.log('aoooba')
-  }
-
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
@@ -48,12 +44,11 @@ export class LoginComponent implements OnInit {
     if (this.formLogin.invalid) {
       return;
     }
-    
     this.authentication = new JwtAuthentication(this.f.email.value, this.f.password.value);
     this.authenticationService.login(this.authentication).pipe(first()).subscribe(
       data => {
-            this.router.navigate(['/']);
-        },
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.router.navigateByUrl(returnUrl);},
         error => {
           this.error = error;
           this.submitted = false;
