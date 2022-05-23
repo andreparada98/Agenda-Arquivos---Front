@@ -24,7 +24,7 @@ const httpOptions = {
 export class AuthenticationService {
 
     private currentUserSubject: BehaviorSubject<UserDetails>;
-    private currentUser: Observable<UserDetails>
+    public currentUser: Observable<UserDetails>
 
     constructor(
         private http: HttpClient,
@@ -42,23 +42,12 @@ export class AuthenticationService {
         login(authentication: JwtAuthentication) {
             console.log(`${environment.api}auth`)
             
-            return this.http.post<Response<Token>>(`${environment.api}login`, authentication, httpOptions)
-            .pipe(map((response: any) => {
-                    console.log(response.message)
-                    if(response.message == 'User Logged In'){
-                        return this.router.navigate(['/']);
-                    }
-
-                    // login successful if there's a jwt token in the response
-                    if (response && response.data.token) {
-                        // store user details and jwt token in local storage to keep user logged in between page refreshes
-                        response.userDetails.token = response.data.token;
-                        localStorage.setItem('currentUser', JSON.stringify(response.userDetails));
-                        this.currentUserSubject.next(response.userDetails);
-                        this.carregarPermissions(response.userDetails.authorities); //Future adds.
-                    }
-    
-                    return response.userDetails;
+            return this.http.post<Response<Token>>(`${environment.api}accounts/authenticate`, authentication, httpOptions)
+            .pipe(map((response:any) => {
+                localStorage.setItem('currentUser', JSON.stringify(response.jwtToken));
+                this.currentUserSubject.next(response)
+                this.startRefreshTokenTimer()
+                    return response;
                 }));
         }
 
@@ -72,6 +61,27 @@ export class AuthenticationService {
             this.currentUserSubject.next(null);
             this.router.navigate(['/auth/login']);
         }
+
+        refreshToken() {
+            return this.http.post<any>(`${environment.api}/refresh-token`, {}, { withCredentials: true })
+                .pipe(map((account) => {
+                    this.currentUserSubject.next(account);
+                    this.startRefreshTokenTimer();
+                    return account;
+                }));
+        }
+
+        private refreshTokenTimeout;
+        private startRefreshTokenTimer() {
+            // parse json object from base64 encoded jwt token
+            const jwtToken = JSON.parse(atob(this.currentUserValue.jwtToken.split('.')[1]));
+            // set a timeout to refresh the token a minute before it expires
+            const expires = new Date(jwtToken.exp * 1000);
+            const timeout = expires.getTime() - Date.now() - (60 * 1000);
+            this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+        }
+
+        
     
 
 }
