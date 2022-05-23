@@ -7,8 +7,13 @@ const routes: Routes = [{
   path: '', component: PagesComponent,
   children: [
     {
-      path:'user',
+      path:'home-page',
       loadChildren: () => import('./home-page/home-page.module').then(m => m.HomePageModule)
+    },
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'home-page',
     }
   ]
 
