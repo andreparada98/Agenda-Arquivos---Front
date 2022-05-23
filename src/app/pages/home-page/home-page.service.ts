@@ -11,7 +11,7 @@ import { AbstractService } from '../../services/abstract.service';
 export class HomePageService extends AbstractService<UserModel> {
 
   constructor(http: HttpClient) { 
-    super(http, '/user')
+    super(http, 'accounts')
   }
 
   getAllUsers(): Observable<UserModel>{
