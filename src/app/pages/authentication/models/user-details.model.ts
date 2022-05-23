@@ -1,4 +1,5 @@
 import { Authorization } from "../../../models/authorization.model";
+import { Role } from "../../../models/role.model";
 
 export class UserDetails {
     id: number;
@@ -6,13 +7,15 @@ export class UserDetails {
     username: string;
     password: string;
     authorities: Authorization[];
-    token?: string;
+    jwtToken?: string;
+    role: Role
 
     constructor(userDetails: UserDetails, token: string) {
         this.id = userDetails.id;
         this.name = userDetails.name;
         this.username = userDetails.username;
         this.password = userDetails.password;
-        this.token = token;
+        this.jwtToken = userDetails.jwtToken;
+        this.role = userDetails.role
     }
 }
