@@ -10,6 +10,8 @@ import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { MessagesModule } from 'primeng/messages';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { PasswordModule } from 'primeng/password';
     RouterModule,
     CardModule,
     PasswordModule,
-    ImageModule
+    ImageModule,
+    MessagesModule
 
   ]
 })

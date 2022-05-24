@@ -1,0 +1,71 @@
+.topMenu{
+  z-index: 2;
+}
+
+#menuLateral{
+  min-width: 235px;
+  max-width: 235px;
+  height: 70vh;
+  margin-top: 30px;
+  padding-top: 65px;
+  position: relative;
+  transition-duration: 350ms;
+  left: -235px;
+}
+
+#col-menuLateral{
+  background-color: white;
+  z-index: 1;
+  transition-duration: 350ms;
+  width: 0px;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+#logo{
+  font-size: 40px;
+  padding-top: 8px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.img-logo{
+  width: 60px;
+  padding-top: 5px;
+  margin-right: 5px;
+}
+
+#two{
+  color: #808080;
+}
+
+.mostraMenu{
+  margin-left: 15px;
+  margin-top: 10px;
+  background-color: transparent;
+}
+
+.divisao{
+  height: 1px;
+  background-color: rgb(230, 230, 230);
+  width: 90%;
+  position: relative;
+  left: -10px;
+  text-align: center;
+}
+
+.divisao-sup{
+  margin-bottom: 10px;
+  height: 1.5px;
+  background-color: rgb(230, 230, 230);
+  width: 100%;
+  text-align: center;
+}
+
+#conteudo{
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  padding-top: 65px;
+}

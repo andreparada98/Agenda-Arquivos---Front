@@ -1,45 +1,114 @@
 <p-card>
+    <div class="grid">
+        <div class="col-4"></div>
+        <div class="col-4 text-center">
+            <div class="col-12">
+                <p>Bem vindo a Agenda Assessoria</p>
+                <p-image src="assets/images/InovaTWO.png" alt="Image" width="300" id="logo"></p-image>
+            </div>
+
+            <form action=""></form>
+
+            <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+                <div class="grid p-fluid">
+                    <div class="col-12">
+
+                        <input type="text" pInputText placeholder="Nome de usuario" id="username" name="username"
+                            formControlName="email" required>
+
+                        <ng-container class="alert"
+                            *ngIf="!formLogin.get('email').valid && formLogin.get('email').touched">
+                            <p id="text-alert" style="text-align: left;">Nome de usuario é obrigatorio!</p>
+                        </ng-container>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-inputgroup">
+                            <input type="password" pInputText placeholder="Senha" id="password" name="password"
+                                formControlName="password" required>
+                        </div>
+                        <ng-container class="alert"
+                            *ngIf="!formLogin.get('password').valid && formLogin.get('password').touched">
+                            <p id="text-alert" style="text-align: left;">Senha é obrigatorio!</p>
+                        </ng-container>
+                    </div>
+                    <div class="col-12">
+                        <a href="" style="padding-bottom: 20px;" id="password-reset">Esqueci minha senha</a>
+                    </div>
+                    <div class="col-12">
+                        <button pButton type="submit" label="LOG IN" class="p-button-raised" style="width: 100%;"
+                            [disabled]="!formLogin.valid"></button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="col-4"></div>
+
+    </div>
+</p-card>
+
+
+
+<!--p-card class="content">
     <h3>Bem vindo ao Agenda Arquivos</h3>
     <p>
         <img src="../../../../assets/images/InovaTWO.png" alt="Pegar um Svg depois">
     </p>
-    <form (ngSubmit)="onSubmit()" [formGroup]="formLogin">
-        <div class="p-fluid grid justify-content-between mt-4 align-items-center">
-            <div class="p-field col-12 md:col-6">
-                <input type="text" pInputText fieldSize="large" id="inputUsername" placeholder="Digite aqui seu usuário"
-                    formControlName="email" pattern=".+@.+\..+" autofocus>
-                <label for="inputUsername" class="label">Usuário</label>
-                <ng-container *ngIf="formLogin.get('email').invalid && formLogin.get('email').touched">
+    <div class="class-body">
+        <form (ngSubmit)="onSubmit()" [formGroup]="formLogin">
+            <div class="p-fluid grid justify-content-between mt-4 align-items-center">
+                <div class="p-field col-12 md:col-6">
+                    <span class="p-float-label">
+
+                
+                    <input type="text" pInputText  id="inputUsername"
+                        formControlName="email" pattern=".+@.+\..+">
+                    <label for="inputUsername" class="label">Usuário</label>
+                    </span>
+                  
+                    <!--ng-container *ngIf="formLogin.get('email').invalid && formLogin.get('email').touched">
+                        <p class="ng-invalid ng-dirty" *ngIf="formLogin.get('email').errors.required">
+                            Email é obrigatório
+                        </p>
+                        <p class="ng-invalid ng-dirty" *ngIf="formLogin.get('email').errors.pattern">
+                            O email deve ser o verdadeiro!
+                        </p>
+                    </ng-container-->
+
+<!--div *ngIf="formLogin.get('email').invalid && formLogin.get('email').touched">
                     <p class="ng-invalid ng-dirty" *ngIf="formLogin.get('email').errors.required">
                         Email é obrigatório
                     </p>
                     <p class="ng-invalid ng-dirty" *ngIf="formLogin.get('email').errors.pattern">
                         O email deve ser o verdadeiro!
                     </p>
-                </ng-container>
-            </div>
+                </div>
+                </div>
+    
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <label for="inputPassword">Senha</label>
+                        <p-password id="inputPassword" formControlName="password" [feedback]="false"></p-password>
+                    </span>
+                    <ng-container *ngIf="formLogin.get('password').invalid && formLogin.get('password').touched">
+                        <p class="caption status-danger" *ngIf="formLogin.get('password').errors.required"> Senha
+                            obrigatório </p>
+                    </ng-container>
+                </div>
+    
+                <div>
+                    <a class="link">Esqueci minha senha</a>
+                </div>
+                < <div class="form-control-group accept-group">
+            <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe" *ngIf="rememberMe">Remember me</nb-checkbox>
+          </div> -->
 
-            <div class="field col-12 md:col-4">
-                <span class="p-float-label">
-                    <label for="inputPassword">Senha</label>
-                    <p-password id="inputPassword" formControlName="password" [feedback]="false"></p-password>
-                </span>
-                <ng-container *ngIf="formLogin.get('password').invalid && formLogin.get('password').touched">
-                    <p class="caption status-danger" *ngIf="formLogin.get('password').errors.required"> Senha
-                        obrigatório </p>
-                </ng-container>
+<!--p-button type="submit" [disabled]="submitted || !formLogin.valid" [class.btn-pulse]="submitted">
+                    Log In
+                </p-button>
             </div>
-
-            <div>
-                <a class="link">Esqueci minha senha</a>
-            </div>
-            <!-- <div class="form-control-group accept-group">
-        <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe" *ngIf="rememberMe">Remember me</nb-checkbox>
-      </div> -->
-
-            <p-button type="submit" [disabled]="submitted || !formLogin.valid" [class.btn-pulse]="submitted">
-                Log In
-            </p-button>
-        </div>
-    </form>
-</p-card>
+        </form>
+    </div>
+   
+</p-card-->

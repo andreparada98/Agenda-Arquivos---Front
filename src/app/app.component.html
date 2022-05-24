@@ -1,20 +1,20 @@
-<div class="app-container" [ngClass]="{ 'bg-light': currentUser }">
-    <!-- main nav -->
-    <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-        <div class="navbar-nav">
-            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link">Home</a>
-            <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
-            <a *ngIf="currentUser.role === Role.Admin" routerLink="/admin" routerLinkActive="active" class="nav-item nav-link">Admin</a>
-            <a (click)="logout()" class="nav-item nav-link">Logout</a>
+<div class="topMenu">
+        <div class="grid">
+            <div class="col-1" style="padding: 0px;">
+                <div class="flex m-2" id="abreMenu">
+                    <p-button type="button" class="mostraMenu" icon="pi pi-align-left"></p-button>
+                </div>
+            </div>
+            <div class="col-8 align-items-center" style="padding: 0px;">
+                <div class="flex m-2">
+                    <h1 style="margin: 0px;" id="logo">Agenda<a id="two">Assessoria</a></h1>
+                </div>
+            </div>
         </div>
-    </nav>
+</div>
 
-    <!-- subnav router outlet -->
-    <router-outlet name="subnav"></router-outlet>
-
-    <!-- global alert -->
-    <!--alert></alert-->
-
-    <!-- main router outlet -->
-    <router-outlet></router-outlet>
+<div class="flex-grow-1 border-round" style="box-shadow: inset 0px 0px 15px #c3d1ee; min-height: 100vh;" id="conteudo">
+    <div class="m-5" >
+        <router-outlet></router-outlet>
+    </div>
 </div>

@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+.topMenu{
+    padding: 0px;
+    background-color: white;
+    border-bottom: none;
+    width: 100%;
+    box-shadow: 1px 10px 10px #c3d1ee96;
+    z-index: 2;
+    position: fixed;
+    top: 0px;
+    max-height: 70px;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+    padding: 0.4rem 1rem;
+}
