@@ -9,13 +9,4 @@ export class UserDetails {
     authorities: Authorization[];
     jwtToken?: string;
     role: Role
-
-    constructor(userDetails: UserDetails, token: string) {
-        this.id = userDetails.id;
-        this.name = userDetails.name;
-        this.username = userDetails.username;
-        this.password = userDetails.password;
-        this.jwtToken = userDetails.jwtToken;
-        this.role = userDetails.role
-    }
 }

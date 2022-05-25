@@ -11,11 +11,11 @@ import { AbstractService } from '../../services/abstract.service';
 export class HomePageService extends AbstractService<UserModel> {
 
   constructor(http: HttpClient) { 
-    super(http, 'accounts')
+    super(http, 'home-page')
   }
 
-  getAllUsers(): Observable<UserModel>{
+  /*getAllUsers(): Observable<UserModel>{
     console.log(this.baseUrlService)
     return this.httpClient.get<UserModel>(this.baseUrlService);
-  }
+  }*/
 }

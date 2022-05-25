@@ -7,6 +7,11 @@ import {ButtonModule} from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import { CardModule } from 'primeng/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AvatarModule } from 'primeng/avatar';
+
+
+
 
 
 @NgModule({
@@ -19,7 +24,9 @@ import { CardModule } from 'primeng/card';
     HttpClientModule,
     ButtonModule,
     TieredMenuModule,
-    CardModule
+    CardModule,
+    BrowserAnimationsModule,
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

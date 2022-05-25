@@ -44,7 +44,7 @@ export class AuthenticationService {
             
             return this.http.post<Response<Token>>(`${environment.api}accounts/authenticate`, authentication, httpOptions)
             .pipe(map((response:any) => {
-                localStorage.setItem('currentUser', JSON.stringify(response.jwtToken));
+                localStorage.setItem('currentUser', JSON.stringify(response));
                 this.currentUserSubject.next(response)
                 this.startRefreshTokenTimer()
                     return response;
