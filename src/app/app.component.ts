@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { AuthenticatedUser } from './models/authenticatedUser.model';
 import { Role } from './models/role.model';
+import { AuthenticatedUserService } from './pages/authentication/guards/authenticatedUser.service';
 import { UserDetails } from './pages/authentication/models/user-details.model';
 import { AuthenticationService } from './pages/authentication/services/authentication.service';
+import { slideInAnimation } from './shared/animations';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [slideInAnimation]
+
 })
 export class AppComponent {
   title = 'Agenda-Arquivos';
@@ -18,18 +23,21 @@ export class AppComponent {
   showMenu: boolean = false;
   itemsUser: MenuItem[];
   menuBar: boolean = true
+  userAuthenticated: AuthenticatedUser;
 
 
 
 
-  constructor(private authService: AuthenticationService, private router: Router) {
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+
+  constructor(private authService: AuthenticatedUserService, private router: Router) {
 }
 
-ngOnInit():void {
+ngOnInit() {
+  this.userAuthenticated = new AuthenticatedUser()
   var teste = setInterval( () => 
   {
-    if(this.currentUser != undefined){
+    this.userAuthenticated = this.authService.userOn
+    if(this.userAuthenticated != undefined){
       this.showMenu = true;
       var auxMenu = document.getElementById('col-menuLateral') as HTMLElement
       var auxMenuList = document.getElementById('menuLateral') as HTMLElement
@@ -58,7 +66,7 @@ logout() {
         auxMenu.style.width = '0px'
         auxMenuList.style.left = '-235px';
         localStorage.removeItem('currentUser');
-        this.currentUser = new UserDetails();
+        this.userAuthenticated = new AuthenticatedUser();
         this.showMenu = false;
         this.router.navigate(['/auth/login'])
 }

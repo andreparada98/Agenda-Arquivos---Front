@@ -6,4 +6,5 @@ export interface UserModel extends BaseModel{
     name: string;
     email: string;
     secret: string;
+    jwtToken: string
 }

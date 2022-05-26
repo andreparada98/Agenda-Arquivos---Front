@@ -5,13 +5,8 @@ import { Component, OnInit } from '@angular/core';
   template: `<router-outlet></router-outlet>`,
   styleUrls: ['./pages.component.css']
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent {
 
   constructor() { }
-
-  ngOnInit() {
-
-
-  }
 
 }

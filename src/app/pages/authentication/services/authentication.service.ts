@@ -39,15 +39,17 @@ export class AuthenticationService {
         }
 
 
-        login(authentication: JwtAuthentication) {
-            console.log(`${environment.api}auth`)
-            
+        login(authentication: JwtAuthentication) {            
             return this.http.post<Response<Token>>(`${environment.api}accounts/authenticate`, authentication, httpOptions)
             .pipe(map((response:any) => {
-                localStorage.setItem('currentUser', JSON.stringify(response));
-                this.currentUserSubject.next(response)
-                this.startRefreshTokenTimer()
+                if (response && response.data.token) {
+                    response.userDetails.jwtToken = response.data.token;
+                    localStorage.setItem('currentUser', JSON.stringify(response.userDetails));
+                    this.currentUserSubject.next(response.userDetails);
+                    this.carregarPermissions(response.userDetails.authorities);
                     return response;
+                }
+                return response.userDetails
                 }));
         }
 
@@ -79,6 +81,10 @@ export class AuthenticationService {
             const expires = new Date(jwtToken.exp * 1000);
             const timeout = expires.getTime() - Date.now() - (60 * 1000);
             this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+        }
+
+        home() {
+            this.router.navigate(['/']);
         }
 
         

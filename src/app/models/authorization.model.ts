@@ -1,7 +1,7 @@
 export class Authorization {
     
-    constructor(authority?: String){
+    constructor(authority?: string){
         this.authority = authority
     }
-    authority: String
+    authority: string
 }

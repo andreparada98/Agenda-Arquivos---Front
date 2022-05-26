@@ -5,6 +5,15 @@ import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UsuarioComponent } from './usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CardModule } from 'primeng/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { ImageModule } from 'primeng/image';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import {TableModule} from 'primeng/table';
+
 
 
 @NgModule({
@@ -15,7 +24,17 @@ import { CardModule } from 'primeng/card';
     CommonModule,
     HttpClientModule,
     UsuarioRoutingModule,
-    CardModule
+    ButtonModule,
+    InputTextModule,
+    ProgressSpinnerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    CardModule,
+    PasswordModule,
+    ImageModule,
+    TableModule
+    
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 
