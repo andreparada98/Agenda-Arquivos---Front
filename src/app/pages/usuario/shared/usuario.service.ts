@@ -17,12 +17,6 @@ export class UsuarioService extends AbstractService<UserModel>{
   constructor(private http: HttpClient) { 
     super(http, 'accounts')
   }
-/*
-  public get userValue(): UserModel {
-    return this.userSubject.value;
-}
-*/
-  
 
   getAllUsers(): Observable<UserModel[]> {
       console.log(this.baseUrlService)

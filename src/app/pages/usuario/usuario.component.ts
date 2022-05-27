@@ -11,16 +11,19 @@ import { UsuarioService } from './shared/usuario.service';
 })
 export class UsuarioComponent implements OnInit {
 usuarios: UserModel[]
+totalRecords: Number
   constructor(
     private usuarioService: UsuarioService
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.loadFromServer()
   }
 
-   incluirNovo(){
+   loadFromServer(){
     this.usuarioService.getAllUsers().subscribe(res => {
       this.usuarios = res
+      this.totalRecords = res.length
       console.log(res)
     })
   }

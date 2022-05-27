@@ -1,5 +1,5 @@
 <p-card header="Lista de Usuários">
-    <p-table #dt [showCurrentPageReport]="true"
+    <p-table #dt [value]="usuarios"  [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[5,10,25,50]" styleClass="p-datatable-gridlines" [paginator]="true"
      [filterDelay]="0" [lazy]="true" 
      [globalFilterFields]="['name','erpCode','company.name']">
@@ -39,7 +39,7 @@
                 </th>
                
         
-                <th class="p-0 w-2">
+                <th class="p-0 w-1">
                   <div class="flex justify-content-center align-items-center">Ações</div>
                 </th>
               </tr>
@@ -49,12 +49,13 @@
             <tr class="p-selectable-row p-0" >
               <td class="p-0">
                 <div class="listStyle">
-                 
+                 {{(element.firstName) + ( element.lastName)}}
                 </div>
               </td>
       
               <td class="p-0">
                 <div class="align-items-center listStyle">
+                  {{element.email}}
                 </div>
               </td>
        
