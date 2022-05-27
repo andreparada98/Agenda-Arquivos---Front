@@ -25,10 +25,6 @@ export class AppComponent {
   menuBar: boolean = true
   userAuthenticated: AuthenticatedUser;
 
-
-
-
-
   constructor(private authService: AuthenticatedUserService, private router: Router) {
 }
 

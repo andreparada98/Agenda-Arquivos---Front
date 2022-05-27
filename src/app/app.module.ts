@@ -13,13 +13,11 @@ import { JwtInterpector } from './pages/authentication/interceptor/jwt.intercept
 import { IniciarAplicacaoService } from './shared/iniciar-aplicacao.service';
 import { AuthGuard } from './pages/authentication/guards/auth.guard';
 import { services } from './services/config.services';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 export function init_app(appLoadService: IniciarAplicacaoService){
   return () => appLoadService.initializeEnvironment();
 }
-
-
-
 @NgModule({
   declarations: [
     AppComponent
@@ -32,11 +30,14 @@ export function init_app(appLoadService: IniciarAplicacaoService){
     TieredMenuModule,
     CardModule,
     BrowserAnimationsModule,
-    AvatarModule
+    AvatarModule,
+    NgxPermissionsModule.forRoot()
+
   ],
   providers: [
+    IniciarAplicacaoService,
     {provide: APP_INITIALIZER, useFactory:init_app, deps: [IniciarAplicacaoService], multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterpector, multi:true },
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterpector, multi:true },
     {provide: APP_INITIALIZER, useFactory: (_iniciarAplicaoService: IniciarAplicacaoService) => async () => {
         return _iniciarAplicaoService.consultarDadosIniciaisAplicacao().then()},
       deps: [IniciarAplicacaoService],
@@ -45,6 +46,7 @@ export function init_app(appLoadService: IniciarAplicacaoService){
     AuthGuard,
     services
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

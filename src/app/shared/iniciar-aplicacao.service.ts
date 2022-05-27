@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { NgxPermissionsService } from 'ngx-permissions';
 import { from } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Authorization } from '../models/authorization.model';
 import { UserDetails } from '../pages/authentication/models/user-details.model';
 import { permission } from './enum/permission.enum';
-import { NgxPermissionsService } from 'ngx-permissions';
 
 
 declare var window: any;
@@ -22,6 +22,7 @@ export class IniciarAplicacaoService {
 
     async consultarDadosIniciaisAplicacao(): Promise<any> {
         if (this.currentUserSubject.value) {
+            console.log(this.currentUserSubject.value)
             let autorieties: Authorization[] = this.currentUserSubject.value.authorities
             let permissions = autorieties.map(role => role.authority);
             this._permissionsService.loadPermissions(permissions);
@@ -34,6 +35,7 @@ export class IniciarAplicacaoService {
     public initializeEnvironment(): Promise<any> {
         return from(
             fetch('assets/app-config.json').then(function(response) {
+                console.log('fetchRes:',response)
                 let value = response.json();
                 return value;
             })
