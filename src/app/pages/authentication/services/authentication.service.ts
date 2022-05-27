@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgxPermissionsService } from "ngx-permissions";
 import { BehaviorSubject, map, Observable } from "rxjs";
 import { environment } from "../../../../environments/environment";
 import { Authorization } from "../../../models/authorization.model";
@@ -20,15 +21,14 @@ const httpOptions = {
 
 
 @Injectable({providedIn: 'root'})
-
 export class AuthenticationService {
-
     private currentUserSubject: BehaviorSubject<UserDetails>;
-    public currentUser: Observable<UserDetails>
+    public currentUser: Observable<UserDetails>;
 
     constructor(
         private http: HttpClient,
-        private router: Router
+        private router: Router,
+        private permissionsService: NgxPermissionsService
         ){
             this.currentUserSubject = new BehaviorSubject<UserDetails>(JSON.parse(localStorage.getItem('currentUser')));
             this.currentUser = this.currentUserSubject.asObservable();
@@ -38,21 +38,25 @@ export class AuthenticationService {
             return this.currentUserSubject.value
         }
 
-
         login(authentication: JwtAuthentication) {
-            console.log(`${environment.api}auth`)
-            
             return this.http.post<Response<Token>>(`${environment.api}accounts/authenticate`, authentication, httpOptions)
-            .pipe(map((response:any) => {
-                localStorage.setItem('currentUser', JSON.stringify(response));
-                this.currentUserSubject.next(response)
-                this.startRefreshTokenTimer()
-                    return response;
+                .pipe(map((response: any) => {
+                    // login successful if there's a jwt token in the response
+                    response.userDetails = response.jwtToken
+                   localStorage.setItem('currentUser', JSON.stringify(response))
+                    this.currentUserSubject.next(response.userDetails)
+                  //  this.carregarPermissions(response.userDetails.authorities);
+                    console.log(response.userDetails)
+    
+                    return response.userDetails;
                 }));
         }
 
+
+
         carregarPermissions(autorieties: Authorization[]) {
-            let permissions = autorieties.map(role => role.authority); 
+            let permissions = autorieties.map(role => role.authority);
+            this.permissionsService.loadPermissions(permissions);
         }
 
         logout() {
@@ -79,6 +83,10 @@ export class AuthenticationService {
             const expires = new Date(jwtToken.exp * 1000);
             const timeout = expires.getTime() - Date.now() - (60 * 1000);
             this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+        }
+
+        home() {
+            this.router.navigate(['/']);
         }
 
         

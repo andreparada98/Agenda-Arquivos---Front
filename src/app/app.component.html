@@ -7,18 +7,19 @@
             </div>
             <div class="col-8 align-items-center" style="padding: 0px;">
                 <div class="flex m-2">
-                    <h1 style="margin: 0px;" id="logo">Agenda<a id="two">Assessoria</a></h1>
+                  <h1 style="margin: 0px;" id="logo">Agenda<a href="/" class="text-decoration: no-underline" id="two">Assessoria</a></h1>
+                    
                 </div>
             </div>
 
             <div class="col-3" style="padding: 0px; margin-top: 4px;">
                 <div class="flex align-items-end justify-content-end m-2" style="padding-right: 30px;" *ngIf="showMenu != false">
+                  <div #btn type="button" (click)="menu.toggle($event)" class="menuPerfil">
                   <p-avatar icon="pi pi-user" size="large"
                     [style]="{'background-color': 'transparent', 'color': 'rgb(63, 63, 63)', 'margin-top': '10px', 'border':'1px solid rgb(220, 220, 220)', 'width':'35px', 'height': '35px'}">
                   </p-avatar>
-                  <div #btn type="button" (click)="menu.toggle($event)" class="menuPerfil">
-                    <p class="perfilName">{{ currentUser.firstName }}</p>
-                    <p class="perfilEmail">{{ currentUser.lastName }}</p>
+                    <p class="perfilName">{{ teste2.firstName }}</p>
+                    <p class="perfilEmail">{{ teste2.lastName }}</p>
                   </div>
                   <p-tieredMenu #menu [model]="itemsUser" [popup]="true"></p-tieredMenu>
                 </div>
@@ -41,11 +42,11 @@
             <div class="accordion-content" id="accordion-content-1">
   
               <ul class="list-group">
-                <li class="list-group-item" [routerLink]="['/company/list']" routerLinkActive="active-link"><i
+                <li class="list-group-item" [routerLink]="['/pages/usuario']" routerLinkActive="active-link"><i
                     class="pi pi-home" id="icon"></i>Empresa</li>
                 <div class="divisao"></div>
   
-                <li class="list-group-item" [routerLink]="['/unit/list']" routerLinkActive="active-link"><i
+                <li class="list-group-item" [routerLink]="['/pages/usuario']" routerLinkActive="active-link"><i
                     class="pi pi-table" id="icon"></i>Unidade</li>
                 <div class="divisao"></div>
   

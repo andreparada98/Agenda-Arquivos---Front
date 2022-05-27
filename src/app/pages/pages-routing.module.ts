@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './authentication/guards/auth.guard';
+import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { PagesComponent } from './pages.component';
 
 const routes: Routes = [{
-  path: '', component: PagesComponent,
+  path: '', 
+  component: PagesComponent,
   children: [
     {
       path:'home-page',
@@ -19,6 +21,10 @@ const routes: Routes = [{
       path: '',
       pathMatch: 'full',
       redirectTo: 'home-page',
+    },
+    {
+      path: '**',
+      component: NotFoundComponent,
     }
   ]
 
