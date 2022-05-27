@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Authorization } from '../models/authorization.model';
 import { UserDetails } from '../pages/authentication/models/user-details.model';
+import { AuthenticationService } from '../pages/authentication/services/authentication.service';
 import { permission } from './enum/permission.enum';
 
 
@@ -16,20 +17,13 @@ export class IniciarAplicacaoService {
     private currentUserSubject: BehaviorSubject<UserDetails>;
 
     constructor(
-        private _permissionsService: NgxPermissionsService) {
+        private _permissionsService: NgxPermissionsService,
+        public authenticationService:AuthenticationService) {
         this.currentUserSubject = new BehaviorSubject<UserDetails>(JSON.parse(localStorage.getItem('currentUser')));
     }
 
     async consultarDadosIniciaisAplicacao(): Promise<any> {
-        if (this.currentUserSubject.value) {
-            console.log(this.currentUserSubject.value)
-            let autorieties: Authorization[] = this.currentUserSubject.value.authorities
-            let permissions = autorieties.map(role => role.authority);
-            this._permissionsService.loadPermissions(permissions);
-        } else {
-            this._permissionsService.loadPermissions([permission.NO_PERMISSION]);
-        }
-        return this._permissionsService.permissions$;
+        this.authenticationService.refreshToken()
     }
 
     public initializeEnvironment(): Promise<any> {

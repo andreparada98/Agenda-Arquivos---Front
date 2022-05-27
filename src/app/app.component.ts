@@ -24,16 +24,17 @@ export class AppComponent {
   itemsUser: MenuItem[];
   menuBar: boolean = true
   userAuthenticated: AuthenticatedUser;
+  teste2: any
 
-  constructor(private authService: AuthenticatedUserService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router) {
 }
 
 ngOnInit() {
-  this.userAuthenticated = new AuthenticatedUser()
   var teste = setInterval( () => 
   {
-    this.userAuthenticated = this.authService.userOn
-    if(this.userAuthenticated != undefined){
+    this.teste2 = (localStorage.getItem('currentUser'))
+    console.log(this.teste2)
+    if(this.teste2 != undefined){
       this.showMenu = true;
       var auxMenu = document.getElementById('col-menuLateral') as HTMLElement
       var auxMenuList = document.getElementById('menuLateral') as HTMLElement
