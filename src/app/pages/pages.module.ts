@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { HomePageComponent } from './home-page/home-page/home-page.component';
 import { PagesComponent } from './pages.component';
+import { ModalsModule } from '../@theme/modals/modals.module';
+import { DialogService } from 'primeng/dynamicdialog';
 
 
 @NgModule({
@@ -12,7 +14,10 @@ import { PagesComponent } from './pages.component';
   ],
   imports: [
     CommonModule,
-    PagesRoutingModule
-  ]
+    PagesRoutingModule,
+    ModalsModule
+  ],
+  providers:[DialogService]
+
 })
 export class PagesModule { }
