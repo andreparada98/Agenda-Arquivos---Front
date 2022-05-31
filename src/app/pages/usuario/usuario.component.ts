@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { ExcluirDialogComponent } from '../../@theme/modals/excluir-dialog/excluir-dialog.component';
 import { ResponseModel } from '../../models/response.model';
 import { UserModel } from '../../models/user.model';
+import { UsuarioModel } from '../../models/usuario.model';
+import { AbstractListComponent } from '../../shared/abstract.list';
 import { UsuarioService } from './shared/usuario.service';
 
 @Component({
@@ -13,26 +15,23 @@ import { UsuarioService } from './shared/usuario.service';
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css']
 })
-export class UsuarioComponent {
+export class UsuarioComponent extends AbstractListComponent<UsuarioModel>{
 
 unsubscribe: Subject<void> = new Subject<void>(); 
 usuarios: UserModel[]
-totalRecords: Number
 
   constructor(
     private usuarioService: UsuarioService,
     public dialogService: DialogService,
     private messageService: MessageService,
+    public activatedRoute: ActivatedRoute,
     public router: Router
-    ) { }
+    ) { super(usuarioService, router, activatedRoute)}
 
-   loadFromServer(event: LazyLoadEvent){
-    this.usuarioService.getAllUsers().subscribe(res => {
-      this.usuarios = res
-      this.totalRecords = res.length
-      console.log(res)
-    })
-  }
+    ngOnInit() {
+      super.ngOnInit
+    }
+
 
   excluir(id: number, title?: string): void {
 

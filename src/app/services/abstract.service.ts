@@ -21,6 +21,10 @@ export class AbstractService<T extends BaseModel> {
           .pipe(catchError(this.handleError('get identifier = ' + identifier)));
       }
 
+      getAll():Observable<T[]> {
+        return this.httpClient.get<T[]>(this.baseUrlService)
+      }
+
       public handleError(operation = 'operation', result?: T | ResponseModel) {
         return (error: any): Observable<T> => {
     

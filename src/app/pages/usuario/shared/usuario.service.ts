@@ -11,7 +11,7 @@ import { AbstractService } from '../../../services/abstract.service';
 })
 
 
-export class UsuarioService extends AbstractService<UserModel>{
+export class UsuarioService extends AbstractService<UsuarioModel>{
   
   private userSubject: BehaviorSubject<UserModel>;
 

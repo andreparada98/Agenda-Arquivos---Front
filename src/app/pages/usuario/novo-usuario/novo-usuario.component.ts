@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { ResponseModel } from '../../../models/response.model';
 import { Role } from '../../../models/role.model';
 import { UsuarioModel } from '../../../models/usuario.model';
+import { AbstractComponent } from '../../../shared/abstract.component';
 import { UserDetails } from '../../authentication/models/user-details.model';
 import { UsuarioService } from '../shared/usuario.service';
 
@@ -15,7 +16,7 @@ import { UsuarioService } from '../shared/usuario.service';
   styleUrls: ['./novo-usuario.component.css']
 })
 
-export class NovoUsuarioComponent implements OnInit {
+export class NovoUsuarioComponent extends AbstractComponent<UsuarioModel>{
 
   item: UsuarioModel
   form: FormGroup
@@ -23,22 +24,22 @@ export class NovoUsuarioComponent implements OnInit {
   roles = Role
   unsubscribe: Subject<void> = new Subject<void>();
   isNew: boolean = true
-
-
-
   public submitted
+  public endPoint: string
+
 
   constructor(
     public activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     public messageService: MessageService,
-    private usuarioService: UsuarioService
-  ) { }
+    private usuarioService: UsuarioService,
+    public router: Router
+  ) { super(usuarioService, activatedRoute, router) }
 
   ngOnInit() {
     this.createForm()
     this.activatedRoute.params.subscribe(param => {
-      console.log('Param.id:', param.id)
+      console.log('Param.id:', param)
      this.excludeControlPassword()
       this.visualizarFormulario()
       if(param.id != undefined){
@@ -99,9 +100,11 @@ export class NovoUsuarioComponent implements OnInit {
       });      
     });
   }
+ 
 
-  voltar(){
-    console.log()
+  voltar() {
+    console.log(this.endPoint)
+    this.router.navigate(['pages/usuario']);
   }
 
 }

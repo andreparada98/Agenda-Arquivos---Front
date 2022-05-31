@@ -1,5 +1,5 @@
 <p-card header="Lista de Usuários">
-    <p-table #dt [value]="usuarios"  [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+    <p-table #dt [value]="data"  [showCurrentPageReport]="true" [totalRecords]="totalRecords"
     [rowsPerPageOptions]="[5,10,25,50]" styleClass="p-datatable-gridlines" [paginator]="true"
      [filterDelay]="0" [lazy]="true" (onLazyLoad)="loadFromServer($event)" 
      currentPageReportTemplate="Exibindo linha {first} até {last} de {totalRecords} registros"
@@ -64,9 +64,9 @@
               <td>
                 <div class="flex sm:flex-row-reverse justify-content-center">
                   <button pButton type="button" icon="pi pi-trash"
-                      class="p-button-raised p-button-danger buttonStyle"(click)="excluir(element.id, element.firstName)" ></button>
+                      class="p-button-raised p-button-danger buttonStyle"(click)="excluir(element.id, element.name)" ></button>
                   <button pButton type="button" icon="pi pi-pencil"
-                      class="p-button-raised p-button-primary buttonStyle"  (click)="editar(element.identifier)"></button>
+                      class="p-button-raised p-button-primary buttonStyle"  (click)="editar(element.id)"></button>
                   <button pButton type="button" icon="pi pi-eye"
                       class="p-button-raised p-button-primary buttonStyle" (click)=visualizar(element.id)></button>
               </div>

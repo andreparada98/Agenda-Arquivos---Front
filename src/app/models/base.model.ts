@@ -1,4 +1,5 @@
-export interface BaseModel {
+export class BaseModel {
+    id: String
     created: Date;
     updated: Date;
 }
